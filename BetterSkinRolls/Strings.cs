@@ -41,6 +41,21 @@ namespace BetterSkinRolls
             [SelfHint] = new Dictionary<string, string>
             {
                 ["en"] = "Your rolls leave out weapons whose skins you've all unlocked. If the host doesn't have the mod, only you see the changed wheel.",
+                ["zh-CN"] = "你转动时会排除皮肤已全部解锁的武器。如果房主没有此模组，只有你能看到修改后的转盘。",
+                ["zh-TW"] = "你轉動時會排除外觀已全部解鎖的武器。如果房主沒有此模組，只有你看得到修改後的轉輪。",
+                ["fr"] = "Vos tirages excluent les armes dont toutes les apparences sont débloquées. Si l'hôte n'a pas le mod, vous seul voyez la roue modifiée.",
+                ["de"] = "Deine Drehungen lassen Waffen aus, deren Skins du alle freigeschaltet hast. Hat der Host den Mod nicht, siehst nur du die geänderte Walze.",
+                ["it"] = "I tuoi giri escludono le armi con tutte le skin sbloccate. Se l'host non ha la mod, solo tu vedi la ruota modificata.",
+                ["ja"] = "スキンをすべて解放した武器は、あなたが回すときに除外されます。ホストがMODを入れていない場合、変更された結果はあなたにだけ表示されます。",
+                ["ko"] = "스킨을 모두 해금한 무기는 내가 돌릴 때 제외됩니다. 호스트에 모드가 없으면 바뀐 결과는 나에게만 보입니다.",
+                ["pl"] = "Twoje losowania pomijają bronie, których wszystkie skórki odblokowałeś. Jeśli host nie ma moda, zmienione losowanie widzisz tylko ty.",
+                ["pt-BR"] = "Seus giros deixam de fora armas com todos os visuais desbloqueados. Se o host não tiver o mod, só você vê a roleta alterada.",
+                ["ru"] = "Ваши прокруты пропускают оружие, у которого открыты все скины. Если у хоста нет мода, изменённый барабан видите только вы.",
+                ["es-MX"] = "Tus giros dejan fuera las armas con todos sus aspectos desbloqueados. Si el anfitrión no tiene el mod, solo tú ves la ruleta cambiada.",
+                ["es-ES"] = "Tus tiradas dejan fuera las armas con todos sus diseños desbloqueados. Si el anfitrión no tiene el mod, solo tú ves la ruleta cambiada.",
+                ["sv"] = "Dina snurr hoppar över vapen där du har låst upp alla skins. Om värden saknar modden ser bara du den ändrade snurren.",
+                ["tr"] = "Çevirişlerin, tüm kaplamalarının kilidini açtığın silahları dışarıda bırakır. Kurucuda mod yoksa değişen çarkı yalnızca sen görürsün.",
+                ["uk"] = "Ваші прокрути пропускають зброю, у якої відкриті всі скіни. Якщо в хоста немає мода, змінений барабан бачите лише ви.",
             },
             [StrikeToggle] = new Dictionary<string, string>
             {
