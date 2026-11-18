@@ -44,4 +44,6 @@ Weapons whose skins are all unlocked stop showing up on the slot machine, with t
 ## Status
 
 - Created with `htf novo`. 1.0.0 tested in game 2026-11-18: solo, modded host + modded client (both ways), vanilla
-  host (local change), vanilla client, Skip off. Not released yet (zip to be rebuilt after the final translation).
+  host (local change), vanilla client, Skip off.
+- **1.0.0 published 2026-11-18**: https://thunderstore.io/c/how-to-fish/p/AviDKaos/BetterSkinRolls/ ,
+  GitHub release https://github.com/AviDKaos/BetterSkinRolls/releases/tag/v1.0.0 . Not in the modpack yet (hub task).
