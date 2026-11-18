@@ -118,7 +118,7 @@ namespace BetterSkinRolls
     }
 
     /// <summary>
-    /// Local fallback (approach A) for a vanilla host: <see cref="SlotMachine.Roll"/> runs on every client with the
+    /// Vanilla host (approach A): <see cref="SlotMachine.Roll"/> runs on every client with the
     /// host's arrays, before any <c>MachineSlot.SetIndex</c>. When you are the roller, swap each slot of a completed
     /// collection for a random incomplete one from the pool, keeping the slot's rarity. The arrays are edited in place
     /// so every other patch (SlotMachineSkinNames' SetIndex postfix, the OnRollFinished unlock) sees the new prize.
@@ -132,7 +132,7 @@ namespace BetterSkinRolls
             {
                 if (!Patches.IsLocal(roller) || InstanceFinder.IsServerStarted)
                     return; // the host already filtered its own rolls in RollRandom
-                if (!Plugin.Enabled.Value || !Plugin.LocalFallback.Value || itemIDs == null || itemSkins == null)
+                if (!Plugin.Enabled.Value || itemIDs == null || itemSkins == null)
                     return;
                 if (LobbySync.GetHostState() != LobbySync.HostState.Vanilla)
                     return; // a modded host already filtered this roll for us
@@ -172,7 +172,7 @@ namespace BetterSkinRolls
                     changed++;
                 }
                 if (changed > 0 && Plugin.LogRolls.Value)
-                    Plugin.Log.LogInfo($"Local fallback: replaced {changed} slot(s) of completed collections " +
+                    Plugin.Log.LogInfo($"Vanilla host, changed locally: {changed} slot(s) of completed collections " +
                                        $"{SkinProgress.Encode(done)}");
             }
             catch (Exception e)

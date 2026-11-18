@@ -17,7 +17,6 @@ namespace BetterSkinRolls
         internal static ManualLogSource Log;
 
         internal static ConfigEntry<bool> Enabled;
-        internal static ConfigEntry<bool> LocalFallback;
         internal static ConfigEntry<bool> StrikeCompletedPrizes;
         internal static ConfigEntry<bool> LogRolls;
 
@@ -30,11 +29,8 @@ namespace BetterSkinRolls
             Enabled = Config.Bind("General", "Enabled", true,
                 "Skip completed weapons: when you roll the slot machine, weapons whose obtainable skins you've all " +
                 "unlocked are left out of the wheel. Other weapons can still give repeats. If the host also has the " +
-                "mod, everyone in the lobby sees the same wheel. Also in Options > Skin Rolls.");
-            LocalFallback = Config.Bind("General", "Local fallback", true,
-                "Change only my wheel if the host lacks the mod: you still only roll weapons you haven't completed, " +
-                "but the filtered wheel and its prize appear only to you; the others see the original roll. Off: " +
-                "vanilla rolls when the host doesn't have the mod. Also in Options > Skin Rolls.");
+                "mod, everyone in the lobby sees the same wheel; if not, only your screen shows the changed wheel and " +
+                "the others see the original roll. Also in Options > Skin Rolls.");
             StrikeCompletedPrizes = Config.Bind("General", "Strike completed prizes", true,
                 "Cross out completed weapons in the prize list: the slot machine's \"Prizes:\" list crosses out the " +
                 "weapons you've completed. Only you see the marks. Also in Options > Skin Rolls.");
@@ -42,7 +38,6 @@ namespace BetterSkinRolls
 
             Enabled.SettingChanged += (_, __) => { LobbySync.PublishNow(); Patches.RefreshPrizes(); GameMenus.Refresh(); };
             StrikeCompletedPrizes.SettingChanged += (_, __) => { Patches.RefreshPrizes(); GameMenus.Refresh(); };
-            LocalFallback.SettingChanged += (_, __) => GameMenus.Refresh();
 
             new Harmony(PluginGuid).PatchAll(typeof(Plugin).Assembly);
             Log.LogInfo($"{PluginName} {PluginVersion} loaded");

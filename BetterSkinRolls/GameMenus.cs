@@ -11,7 +11,7 @@ namespace BetterSkinRolls
     /// <summary>
     /// The mod's settings inside the game's Options, built by cloning the game's widgets so they look the same:
     /// - Options gets a fifth tab, "Skin Rolls", next to Gameplay/Graphics/Audio/Language: a copy of the Gameplay panel
-    ///   with three toggle rows (the personal settings), each with a hint line under it.
+    ///   with two toggle rows (the personal settings), each with a hint line under it.
     /// Layout facts (game 2026-11): OptionsScreen/UpperButtonHolder (HorizontalLayoutGroup, 4 × 250 px tabs in 1030 px)
     /// holds the tab buttons, whose persistent onClick calls SetActive on every "...Display (To toggle)" panel;
     /// panels are 1030 × 700 with a Layout (VerticalLayoutGroup) of 1030 × 60 rows (title TMP 412 px + Toggle 40 px).
@@ -28,8 +28,8 @@ namespace BetterSkinRolls
         private static readonly System.Reflection.FieldInfo Instance = AccessTools.Field(typeof(PauseManager), "_instance");
 
         private static GameObject _panel;
-        private static Toggle _self, _fallback, _strike;
-        private static TextMeshProUGUI _selfTitle, _selfHint, _fallbackTitle, _fallbackHint, _strikeTitle, _strikeHint;
+        private static Toggle _self, _strike;
+        private static TextMeshProUGUI _selfTitle, _selfHint, _strikeTitle, _strikeHint;
         private static bool _optionsFailed, _languageHooked;
 
         private static void Postfix()
@@ -84,8 +84,6 @@ namespace BetterSkinRolls
 
             _self = AddRow(layout, rowTemplate, Plugin.Enabled, out _selfTitle);
             _selfHint = AddHint(layout, rowTemplate, layout.childCount);
-            _fallback = AddRow(layout, rowTemplate, Plugin.LocalFallback, out _fallbackTitle);
-            _fallbackHint = AddHint(layout, rowTemplate, layout.childCount);
             _strike = AddRow(layout, rowTemplate, Plugin.StrikeCompletedPrizes, out _strikeTitle);
             _strikeHint = AddHint(layout, rowTemplate, layout.childCount);
             UnityEngine.Object.DestroyImmediate(rowTemplate.gameObject);
@@ -250,7 +248,6 @@ namespace BetterSkinRolls
             {
                 SetTexts();
                 if (_self) _self.SetIsOnWithoutNotify(Plugin.Enabled.Value);
-                if (_fallback) _fallback.SetIsOnWithoutNotify(Plugin.LocalFallback.Value);
                 if (_strike) _strike.SetIsOnWithoutNotify(Plugin.StrikeCompletedPrizes.Value);
             }
             catch (Exception e)
@@ -263,8 +260,6 @@ namespace BetterSkinRolls
         {
             if (_selfTitle) _selfTitle.text = Strings.Get(Strings.SelfToggle);
             if (_selfHint) _selfHint.text = Strings.Get(Strings.SelfHint);
-            if (_fallbackTitle) _fallbackTitle.text = Strings.Get(Strings.FallbackToggle);
-            if (_fallbackHint) _fallbackHint.text = Strings.Get(Strings.FallbackHint);
             if (_strikeTitle) _strikeTitle.text = Strings.Get(Strings.StrikeToggle);
             if (_strikeHint) _strikeHint.text = Strings.Get(Strings.StrikeHint);
         }

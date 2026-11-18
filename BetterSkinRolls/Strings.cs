@@ -9,8 +9,6 @@ namespace BetterSkinRolls
     {
         public const string SelfToggle = "SelfToggle";
         public const string SelfHint = "SelfHint";
-        public const string FallbackToggle = "FallbackToggle";
-        public const string FallbackHint = "FallbackHint";
         public const string StrikeToggle = "StrikeToggle";
         public const string StrikeHint = "StrikeHint";
 
@@ -42,60 +40,7 @@ namespace BetterSkinRolls
             },
             [SelfHint] = new Dictionary<string, string>
             {
-                ["en"] = "Your rolls leave out weapons whose skins you've all unlocked. Other weapons can still give repeats.",
-                ["zh-CN"] = "你转动时会排除皮肤已全部解锁的武器。其他武器仍可能抽到重复的皮肤。",
-                ["zh-TW"] = "你轉動時會排除外觀已全部解鎖的武器。其他武器仍可能抽到重複的外觀。",
-                ["fr"] = "Vos tirages excluent les armes dont toutes les apparences sont débloquées. Les autres peuvent encore donner des doublons.",
-                ["de"] = "Deine Drehungen lassen Waffen aus, deren Skins du alle freigeschaltet hast. Andere Waffen können weiter Duplikate geben.",
-                ["it"] = "I tuoi giri escludono le armi con tutte le skin sbloccate. Le altre armi possono ancora dare doppioni.",
-                ["ja"] = "スキンをすべて解放した武器は、あなたが回すときに除外されます。他の武器では重複が出ることもあります。",
-                ["ko"] = "스킨을 모두 해금한 무기는 내가 돌릴 때 제외됩니다. 다른 무기는 여전히 중복이 나올 수 있습니다.",
-                ["pl"] = "Twoje losowania pomijają bronie, których wszystkie skórki odblokowałeś. Inne bronie wciąż mogą dać duplikaty.",
-                ["pt-BR"] = "Seus giros deixam de fora armas com todos os visuais desbloqueados. As outras armas ainda podem repetir.",
-                ["ru"] = "Ваши прокруты пропускают оружие, у которого открыты все скины. Другое оружие всё ещё может дать повторы.",
-                ["es-MX"] = "Tus giros dejan fuera las armas con todos sus aspectos desbloqueados. Las demás aún pueden dar repetidos.",
-                ["es-ES"] = "Tus tiradas dejan fuera las armas con todos sus diseños desbloqueados. Las demás aún pueden dar repetidos.",
-                ["sv"] = "Dina snurr hoppar över vapen där du har låst upp alla skins. Andra vapen kan fortfarande ge dubbletter.",
-                ["tr"] = "Çevirişlerin, tüm kaplamalarının kilidini açtığın silahları dışarıda bırakır. Diğer silahlar yine tekrar verebilir.",
-                ["uk"] = "Ваші прокрути пропускають зброю, у якої відкриті всі скіни. Інша зброя ще може дати повтори.",
-            },
-            [FallbackToggle] = new Dictionary<string, string>
-            {
-                ["en"] = "Change only my wheel if the host lacks the mod",
-                ["zh-CN"] = "房主没有模组时仅修改我的转盘",
-                ["zh-TW"] = "房主沒有模組時僅修改我的轉輪",
-                ["fr"] = "Modifier seulement ma roue si l'hôte n'a pas le mod",
-                ["de"] = "Nur meine Walze ändern, wenn der Host den Mod nicht hat",
-                ["it"] = "Modifica solo la mia ruota se l'host non ha la mod",
-                ["ja"] = "ホストがMOD未導入なら自分の結果だけ変更",
-                ["ko"] = "호스트에 모드가 없으면 내 화면만 변경",
-                ["pl"] = "Zmieniaj tylko moje losowanie, gdy host nie ma moda",
-                ["pt-BR"] = "Alterar só a minha roleta se o host não tiver o mod",
-                ["ru"] = "Менять только мой барабан, если у хоста нет мода",
-                ["es-MX"] = "Cambiar solo mi ruleta si el anfitrión no tiene el mod",
-                ["es-ES"] = "Cambiar solo mi ruleta si el anfitrión no tiene el mod",
-                ["sv"] = "Ändra bara min snurr om värden saknar modden",
-                ["tr"] = "Kurucuda mod yoksa yalnızca benim çarkımı değiştir",
-                ["uk"] = "Змінювати лише мій барабан, якщо в хоста немає мода",
-            },
-            [FallbackHint] = new Dictionary<string, string>
-            {
-                ["en"] = "Without the mod on the host, the filtered wheel and its prize appear only to you; the others see the original roll.",
-                ["zh-CN"] = "房主没有模组时，过滤后的转盘和奖品只有你能看到；其他人看到原本的结果。",
-                ["zh-TW"] = "房主沒有模組時，過濾後的轉輪和獎品只有你看得到；其他人看到原本的結果。",
-                ["fr"] = "Sans le mod chez l'hôte, la roue filtrée et son prix n'apparaissent que pour vous ; les autres voient le tirage d'origine.",
-                ["de"] = "Ohne Mod beim Host siehst nur du die gefilterte Walze und ihren Preis; die anderen sehen die ursprüngliche Drehung.",
-                ["it"] = "Senza la mod sull'host, la ruota filtrata e il suo premio compaiono solo a te; gli altri vedono il giro originale.",
-                ["ja"] = "ホストにMODがない場合、絞り込んだ結果と景品はあなたにだけ表示され、他の人には元の結果が見えます。",
-                ["ko"] = "호스트에 모드가 없으면 걸러진 결과와 상품은 나에게만 보이고, 다른 사람은 원래 결과를 봅니다.",
-                ["pl"] = "Gdy host nie ma moda, przefiltrowane losowanie i nagrodę widzisz tylko ty; inni widzą pierwotne losowanie.",
-                ["pt-BR"] = "Sem o mod no host, a roleta filtrada e o prêmio dela aparecem só para você; os outros veem o giro original.",
-                ["ru"] = "Если у хоста нет мода, отфильтрованный барабан и приз видите только вы; остальные видят исходный прокрут.",
-                ["es-MX"] = "Sin el mod en el anfitrión, la ruleta filtrada y su premio solo los ves tú; los demás ven el giro original.",
-                ["es-ES"] = "Sin el mod en el anfitrión, la ruleta filtrada y su premio solo los ves tú; los demás ven la tirada original.",
-                ["sv"] = "Utan modden hos värden ser bara du den filtrerade snurren och dess pris; de andra ser den ursprungliga.",
-                ["tr"] = "Kurucuda mod yoksa filtrelenmiş çarkı ve ödülünü yalnızca sen görürsün; diğerleri asıl çevirişi görür.",
-                ["uk"] = "Якщо в хоста немає мода, відфільтрований барабан і приз бачите лише ви; інші бачать початковий прокрут.",
+                ["en"] = "Your rolls leave out weapons whose skins you've all unlocked. If the host doesn't have the mod, only you see the changed wheel.",
             },
             [StrikeToggle] = new Dictionary<string, string>
             {

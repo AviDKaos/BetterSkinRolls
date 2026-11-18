@@ -10,8 +10,9 @@ The host is the one who rolls the wheel, so:
 
 - **Host with the mod**: when a player who also has the mod rolls, the host builds the wheel without that player's
   completed weapons. Everyone in the lobby sees the same wheel and the same prize, **even players without the mod**.
-- **Host without the mod**: your own rolls are changed on your side only (*Local fallback*). You still get a skin of a
-  weapon you haven't finished, but the other players see the original wheel and prize.
+- **Host without the mod**: your own rolls are changed on your side only. You still get a skin of a weapon you
+  haven't finished, but the other players see the original wheel and prize. If you'd rather see the same wheel as
+  everyone, turn *Skip completed weapons* off for that game.
 - Players without the mod always get vanilla rolls.
 
 The mod shares which weapons you completed through Steam lobby data, so vanilla players never receive anything new.
@@ -30,8 +31,8 @@ The mod shares which weapons you completed through Steam lobby data, so vanilla 
 
 In game:
 
-- **Options > Skin Rolls** (your own settings): *Skip completed weapons*, *Local fallback (host without the mod)* and
-  *Cross out completed weapons in the prize list*, each with a short description. There's no host
+- **Options > Skin Rolls** (your own settings): *Skip completed weapons* and *Cross out completed weapons in the prize
+  list*, each with a short description. There's no host
   setting: every player decides for their own rolls.
 
 The same settings are in r2modman's Config editor (`avidkaos.howtofish.betterskinrolls.cfg`):
@@ -39,7 +40,6 @@ The same settings are in r2modman's Config editor (`avidkaos.howtofish.betterski
 | Setting | Default | What it does |
 |---|---|---|
 | General > Enabled | on | Your rolls leave out weapons whose skins you've all unlocked. |
-| General > Local fallback | on | If the host doesn't have the mod, change only your own wheel (the others see the original roll). |
 | General > Strike completed prizes | on | Cross out your completed weapons in the machine's "Prizes:" list. |
 
 ## Compatibility
