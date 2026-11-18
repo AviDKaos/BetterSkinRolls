@@ -40,4 +40,5 @@ Weapons whose skins are all unlocked stop showing up on the slot machine, with t
 
 ## Status
 
-- Created with `htf novo`. 0.1.0 implemented, waiting for the in-game test (solo, modded host, vanilla host).
+- Created with `htf novo`. 1.0.0 released 2026-11-18: solo host tested in game (completed weapon gone, prizes struck);
+  modded host + modded client and the vanilla-host fallback not tested yet.
