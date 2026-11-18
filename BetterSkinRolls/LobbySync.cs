@@ -49,6 +49,10 @@ namespace BetterSkinRolls
                 if (member != null && (force || member != _lastMember))
                 {
                     SteamMatchmaking.SetLobbyMemberData(lobby, Key, member);
+                    if (Plugin.LogRolls.Value && member != _lastMember)
+                        Plugin.Log.LogInfo($"[lobby] shared with the host: " + (member == "off"
+                            ? "Skip completed weapons is off"
+                            : "completed weapons " + WheelLog.Names(SkinProgress.Decode(member.Substring(3)))));
                     _lastMember = member;
                 }
 
@@ -57,7 +61,11 @@ namespace BetterSkinRolls
                     const string host = "on";
                     // Only the owner can set lobby data; the call just fails for anyone else.
                     if ((force || host != _lastHost) && SteamMatchmaking.SetLobbyData(lobby, Key, host))
+                    {
+                        if (Plugin.LogRolls.Value && _lastHost == null)
+                            Plugin.Log.LogInfo("[lobby] you host this lobby: marked it as having the mod");
                         _lastHost = host;
+                    }
                 }
             }
             catch (Exception e)

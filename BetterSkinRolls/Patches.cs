@@ -71,6 +71,10 @@ namespace BetterSkinRolls
                 if (items == null)
                     return;
                 var done = CompletedFor(roller);
+                if (Plugin.LogRolls.Value)
+                    Plugin.Log.LogInfo($"[host] {roller.SteamName} ({(Patches.IsLocal(roller) ? "you" : "other player")}) " +
+                                       $"rolls; completed weapons: " +
+                                       (done == null ? "unknown (no mod, or Skip completed weapons off)" : WheelLog.Names(done)));
                 if (done == null || done.Count == 0)
                     return;
 
@@ -90,7 +94,7 @@ namespace BetterSkinRolls
                 SetExcludeBoat.Invoke(null, new object[] { excludeBoat });
 
                 if (Plugin.LogRolls.Value)
-                    Plugin.Log.LogInfo($"Host roll for {roller.SteamName}: skipping {SkinProgress.Encode(done)}, " +
+                    Plugin.Log.LogInfo($"[host] filtered the wheel for {roller.SteamName}: skipping {WheelLog.Names(done)}, " +
                                        $"{keep.Count} item(s) left, boat {(excludeBoat ? "excluded" : "kept")}");
             }
             catch (Exception e)
@@ -179,6 +183,68 @@ namespace BetterSkinRolls
             {
                 Plugin.Log.LogError($"Could not change the roll locally: {e}");
             }
+        }
+
+        /// <summary>
+        /// Debug > Log rolls: every client logs each wheel it shows (after any local change), so one player's log is
+        /// enough to check a multiplayer test: who rolled, whether the host has the mod, the 10 slots, the prize and
+        /// whether any of your completed weapons is on the wheel.
+        /// </summary>
+        private static void Postfix(Player roller, byte[] itemIDs, byte[] itemSkins, byte rolled)
+        {
+            if (!Plugin.LogRolls.Value)
+                return;
+            try
+            {
+                bool host = InstanceFinder.IsServerStarted;
+                string hostMod = host ? "you are the host" : $"host has the mod: {(LobbySync.GetHostState() == LobbySync.HostState.Modded ? "yes" : "no")}";
+                var done = SkinProgress.LocalCompleted();
+                var slots = new List<string>();
+                var yoursOnWheel = new HashSet<byte>();
+                int n = Math.Min(itemIDs.Length, itemSkins.Length);
+                for (int i = 0; i < n; i++)
+                {
+                    slots.Add(WheelLog.Slot(itemIDs[i], itemSkins[i]));
+                    if (done != null && done.Contains(itemIDs[i]))
+                        yoursOnWheel.Add(itemIDs[i]);
+                }
+                Plugin.Log.LogInfo($"[wheel] {roller?.SteamName} rolled ({(Patches.IsLocal(roller) ? "you" : "other player")}, {hostMod}). " +
+                                   $"Prize: {(rolled < n ? WheelLog.Slot(itemIDs[rolled], itemSkins[rolled]) : "?")}. " +
+                                   $"Your completed weapons on this wheel: {(yoursOnWheel.Count == 0 ? "none" : WheelLog.Names(yoursOnWheel))}. " +
+                                   $"Slots: {string.Join(" | ", slots)}");
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning($"Could not log the wheel: {e.Message}");
+            }
+        }
+    }
+
+    internal static class WheelLog
+    {
+        public static string Name(byte id)
+        {
+            if (id == SkinProgress.BoatId)
+                return "Boat";
+            var item = GameInfo.IDToItem(id);
+            return item ? item.name : id.ToString();
+        }
+
+        public static string Names(IEnumerable<byte> ids)
+        {
+            var list = new List<string>();
+            foreach (var id in ids)
+                list.Add(Name(id));
+            return list.Count == 0 ? "none" : string.Join(", ", list);
+        }
+
+        public static string Slot(byte id, byte skin)
+        {
+            var preset = SkinProgress.PresetFor(id);
+            if (!preset || skin >= preset.Skins.Count)
+                return $"{Name(id)} #{skin}";
+            var s = preset.Skins[skin];
+            return $"{Name(id)} {s.Name} ({s.Rarity})";
         }
     }
 
