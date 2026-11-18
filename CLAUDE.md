@@ -20,11 +20,13 @@ Weapons whose skins are all unlocked stop showing up on the slot machine, with t
   `SendRoll` untouched, so every client sees the same wheel, vanilla or not. Everything complete: vanilla roll.
 - **Sync** (`LobbySync`): Steam lobby data, never FishNet messages. Member data `BetterSkinRolls` = `on:54,57,255` or
   `off` (published every 1 s if changed, and right after the local unlock); lobby data `BetterSkinRolls` = `on`/`off`
-  from the host (Host > Lobby filter). Missing = vanilla host.
+  = `on` from a modded host (it always filters modded players). Missing = vanilla host.
 - **Local fallback** (`RollPatch`, approach A): prefix on `SlotMachine.Roll` when you rolled, aren't the server and the
   host is vanilla: completed slots become a random incomplete collection with the same rarity, arrays edited in place
   (SlotMachineSkinNames' `SetIndex` postfix and the unlock see the new prize). Others see the original roll.
-- Toggles: global by the host (Lobby filter) + each player's own Enabled / Local fallback. No per-player host list.
+- Toggles: each player's own (Enabled, Local fallback, Strike), in a 5th Options tab "Skin Rolls" (`GameMenus`).
+  The host's lobby-wide switch was removed on 2026-11-18 (user: only modded players benefit, and they can turn it
+  off themselves).
 - Extra: `UpdatePrizesText` postfix strikes completed prizes locally.
 
 ## Layout

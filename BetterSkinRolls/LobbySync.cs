@@ -9,14 +9,15 @@ namespace BetterSkinRolls
     /// Shares state through Steam lobby data instead of FishNet messages, so vanilla players never receive anything
     /// they can't parse:
     /// - member data <see cref="Key"/> on every modded player: "on:54,57,255" (completed collections) or "off";
-    /// - lobby data <see cref="Key"/>, set by the host (the lobby owner): "on" or "off" (Host > Lobby filter).
-    ///   Missing means a vanilla host, and modded players then fall back to changing their own rolls locally.
+    /// - lobby data <see cref="Key"/>, set by a modded host (the lobby owner): "on". It means the host filters the
+    ///   rolls of every modded player (each one's own Enabled decides); missing means a vanilla host, and modded
+    ///   players then fall back to changing their own rolls locally.
     /// </summary>
     internal static class LobbySync
     {
         public const string Key = "BetterSkinRolls";
 
-        public enum HostState { Vanilla, On, Off }
+        public enum HostState { Vanilla, Modded }
 
         private static CSteamID _lastLobby = CSteamID.Nil;
         private static string _lastMember, _lastHost;
@@ -53,7 +54,7 @@ namespace BetterSkinRolls
 
                 if (InstanceFinder.IsServerStarted)
                 {
-                    string host = Plugin.LobbyFilter.Value ? "on" : "off";
+                    const string host = "on";
                     // Only the owner can set lobby data; the call just fails for anyone else.
                     if ((force || host != _lastHost) && SteamMatchmaking.SetLobbyData(lobby, Key, host))
                         _lastHost = host;
@@ -75,9 +76,8 @@ namespace BetterSkinRolls
                     return HostState.Vanilla;
                 switch (SteamMatchmaking.GetLobbyData(lobby, Key))
                 {
-                    case "on": return HostState.On;
-                    case "off": return HostState.Off;
-                    default: return HostState.Vanilla;
+                    case "": case null: return HostState.Vanilla;
+                    default: return HostState.Modded;
                 }
             }
             catch

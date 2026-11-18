@@ -24,18 +24,23 @@ The mod shares which weapons you completed through Steam lobby data, so vanilla 
 - Skins that can't be obtained (for example Assault Rifle Orange/Blue, Fishing Rod Gold, Pistol Missing, Boat Fire)
   don't count: a weapon is complete when every skin the machine can give is yours.
 - If every prize of an island is complete, the roll is vanilla.
-- The machine's "Prizes:" list strikes through the weapons you completed (only on your screen).
+- The machine's "Prizes:" list crosses out the weapons you completed (only on your screen).
 
 ## Settings
 
-Edit them in r2modman (Config editor, `avidkaos.howtofish.betterskinrolls.cfg`):
+In game:
+
+- **Options > Skin Rolls** (your own settings): *Skip completed weapons*, *Local fallback (host without the mod)* and
+  *Cross out completed weapons in the prize list*, each with a short description. There's no host
+  setting: every player decides for their own rolls.
+
+The same settings are in r2modman's Config editor (`avidkaos.howtofish.betterskinrolls.cfg`):
 
 | Setting | Default | What it does |
 |---|---|---|
-| General > Enabled | on | Turns the mod off for your own rolls. |
-| General > Local fallback | on | With a host without the mod, change your rolls on your side only. |
-| General > Strike completed prizes | on | Strike your completed weapons in the "Prizes:" list. |
-| Host > Lobby filter | on | When you host: filter the rolls of every player with the mod. Off turns the mod off for the whole lobby (their local fallback too); your own rolls follow *Enabled*. |
+| General > Enabled | on | Your rolls leave out weapons whose skins you've all unlocked. |
+| General > Local fallback | on | If the host doesn't have the mod, change only your own wheel (the others see the original roll). |
+| General > Strike completed prizes | on | Cross out your completed weapons in the machine's "Prizes:" list. |
 
 ## Compatibility
 

@@ -19,7 +19,6 @@ namespace BetterSkinRolls
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> LocalFallback;
         internal static ConfigEntry<bool> StrikeCompletedPrizes;
-        internal static ConfigEntry<bool> LobbyFilter;
         internal static ConfigEntry<bool> LogRolls;
 
         private float _nextSync;
@@ -29,22 +28,21 @@ namespace BetterSkinRolls
             Log = Logger;
 
             Enabled = Config.Bind("General", "Enabled", true,
-                "Weapons (and the boat) whose obtainable skins you all own stop showing up on the slot machine when you " +
-                "roll. Needs the host to have the mod for everyone to see the same wheel (see Local fallback).");
+                "Skip completed weapons: when you roll the slot machine, weapons whose obtainable skins you've all " +
+                "unlocked are left out of the wheel. Other weapons can still give repeats. If the host also has the " +
+                "mod, everyone in the lobby sees the same wheel. Also in Options > Skin Rolls.");
             LocalFallback = Config.Bind("General", "Local fallback", true,
-                "When the host doesn't have the mod, change your own rolls on your side only: you still get a skin of a " +
-                "weapon you haven't completed, but the other players see the original wheel and prize.");
+                "Change only my wheel if the host lacks the mod: you still only roll weapons you haven't completed, " +
+                "but the filtered wheel and its prize appear only to you; the others see the original roll. Off: " +
+                "vanilla rolls when the host doesn't have the mod. Also in Options > Skin Rolls.");
             StrikeCompletedPrizes = Config.Bind("General", "Strike completed prizes", true,
-                "Strike through your completed weapons in the machine's \"Prizes:\" list (only on your screen).");
-            LobbyFilter = Config.Bind("Host", "Lobby filter", true,
-                "When you host: skip the completed weapons of every player who has the mod enabled, so the whole lobby " +
-                "sees the same wheel. Off: other players' rolls are vanilla and their local fallback is off too. Your " +
-                "own rolls follow General > Enabled.");
+                "Cross out completed weapons in the prize list: the slot machine's \"Prizes:\" list crosses out the " +
+                "weapons you've completed. Only you see the marks. Also in Options > Skin Rolls.");
             LogRolls = Config.Bind("Debug", "Log rolls", false, "Log every roll this mod changes.");
 
-            Enabled.SettingChanged += (_, __) => { LobbySync.PublishNow(); Patches.RefreshPrizes(); };
-            LobbyFilter.SettingChanged += (_, __) => LobbySync.PublishNow();
-            StrikeCompletedPrizes.SettingChanged += (_, __) => Patches.RefreshPrizes();
+            Enabled.SettingChanged += (_, __) => { LobbySync.PublishNow(); Patches.RefreshPrizes(); GameMenus.Refresh(); };
+            StrikeCompletedPrizes.SettingChanged += (_, __) => { Patches.RefreshPrizes(); GameMenus.Refresh(); };
+            LocalFallback.SettingChanged += (_, __) => GameMenus.Refresh();
 
             new Harmony(PluginGuid).PatchAll(typeof(Plugin).Assembly);
             Log.LogInfo($"{PluginName} {PluginVersion} loaded");

@@ -57,7 +57,7 @@ namespace BetterSkinRolls
         {
             if (Patches.IsLocal(roller))
                 return Plugin.Enabled.Value ? SkinProgress.LocalCompleted() : null;
-            return Plugin.LobbyFilter.Value ? LobbySync.GetMemberCompleted(roller.SteamID) : null;
+            return LobbySync.GetMemberCompleted(roller.SteamID); // null when that player is vanilla or turned it off
         }
 
         private static void Prefix(Player roller, out Saved __state)
@@ -135,7 +135,7 @@ namespace BetterSkinRolls
                 if (!Plugin.Enabled.Value || !Plugin.LocalFallback.Value || itemIDs == null || itemSkins == null)
                     return;
                 if (LobbySync.GetHostState() != LobbySync.HostState.Vanilla)
-                    return; // a modded host decides (filter on: already done; off: vanilla for everyone)
+                    return; // a modded host already filtered this roll for us
 
                 var done = SkinProgress.LocalCompleted();
                 if (done == null || done.Count == 0)
